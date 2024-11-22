@@ -1,3 +1,3 @@
 UPDATE sections
-SET status = 'D'
+SET status = ?, assignedFacultyId = ?
 WHERE courseCode = ? AND sectionCode = ? AND termsId = ?;

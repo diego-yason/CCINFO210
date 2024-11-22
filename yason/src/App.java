@@ -11,10 +11,10 @@ public class App {
     private static final String USER = "root";
     private static final String PASSWORD = "DLSU1234!";
 
-    private static Scanner scanner;
+    public static Scanner scanner;
+    public static Connection db;
 
     public static void main(String[] args) throws Exception {
-        Connection db = null;
         Class.forName("com.mysql.cj.jbdc.Driver");
 
         db = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -28,13 +28,13 @@ public class App {
             System.out.println("4. Exit");
             switch (getInput(1, 4)) {
                 case 1:
-                    CoreData.run(db);
+                    CoreData.run();
                     break;
                 case 2:
-                    TransactionManagement.run(db);
+                    TransactionManagement.run();
                     break;
                 case 3:
-                    ReportGeneration.run(db);
+                    ReportGeneration.run();
                     break;
                 case 4:
                     db.close();
@@ -47,9 +47,9 @@ public class App {
     public static String readQuery(String address) {
         StringBuilder query = new StringBuilder();
         try {
-            Scanner scanner = new Scanner(new File("sql/" + address));
+            Scanner scanner = new Scanner(new File("sql/" + address + ".sql"));
             while (scanner.hasNextLine()) {
-                query.append(scanner.nextLine()).append("\n");
+                query.append(scanner.nextLine()).append(" ");
             }
             scanner.close();
         } catch (FileNotFoundException e) {
