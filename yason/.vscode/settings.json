@@ -1,0 +1,35 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": ["lib/**/*.jar"],
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "local",
+      "database": "ccinfo210db",
+      "username": "root",
+      "password": "DLSU1234!"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "100.103.244.13",
+      "port": 3308,
+      "driver": "MySQL",
+      "name": "renzo",
+      "database": "ccinfo210db",
+      "username": "root",
+      "password": "DLSU1234!"
+    }
+  ]
+}
