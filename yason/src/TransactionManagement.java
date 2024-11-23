@@ -1,5 +1,3 @@
-import java.sql.Connection;
-
 public class TransactionManagement {
 
     public static void run() {

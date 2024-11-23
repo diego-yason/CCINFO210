@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class App {
-    private static final String local = "jdbc:mysql://localhost:3306/ccinfo210db";
-    private static final String remote = "jdbc:mysql://100.103.244.13:3308/ccinfo210db";
-    private static final String URL = local;
+    private static final String URL = "jdbc:mysql://localhost:3306/ccinfo210db";
+    // private static final String URL =
+    // "jdbc:mysql://100.103.244.13:3308/ccinfo210db";
     private static final String USER = "root";
     private static final String PASSWORD = "DLSU1234!";
 
@@ -15,7 +15,7 @@ public class App {
     public static Connection db;
 
     public static void main(String[] args) throws Exception {
-        Class.forName("com.mysql.cj.jbdc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         db = DriverManager.getConnection(URL, USER, PASSWORD);
         scanner = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class App {
     public static String readQuery(String address) {
         StringBuilder query = new StringBuilder();
         try {
-            Scanner scanner = new Scanner(new File("sql/" + address + ".sql"));
+            Scanner scanner = new Scanner(new File("src/sql/" + address + ".sql"));
             while (scanner.hasNextLine()) {
                 query.append(scanner.nextLine()).append(" ");
             }
@@ -58,15 +58,33 @@ public class App {
         return query.toString();
     }
 
-    private static int getInput(int min, int max) {
+    public static int getInput(int min, int max) {
         while (true) {
             try {
+                System.out.print(">>> ");
                 int input = Integer.parseInt(scanner.nextLine());
                 if (input >= min && input <= max) {
                     return input;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please try again.");
+            }
+        }
+    }
+
+    public static String getTextInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
+    }
+
+    public static String getTextInput(String prompt, boolean required) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine();
+            if (required && input.isEmpty()) {
+                System.out.println("ERR: This field is required.");
+            } else {
+                return input;
             }
         }
     }
