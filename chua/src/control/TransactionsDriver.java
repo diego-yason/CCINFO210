@@ -86,8 +86,8 @@ public class TransactionsDriver {
 			System.out.println("Directory of file:");
 			String name = scan.nextLine();
 			try {
-			String content = Files.readString(Path.of(name));
-			System.out.println(content);
+				String content = Files.readString(Path.of(name));
+				System.out.println(content);
 				String[] lines = content.split("\n");
 
 			for(int i=0; i<lines.length; i++) {
@@ -101,7 +101,9 @@ public class TransactionsDriver {
 				grades.add(new Grade(grade,courseCode,id,termId,section));
 			}
 			String result = tq.insertGrade(grades);
-			return result;
+			if(result != null)
+				throw new Exception(result);
+			return ResultMessages.INSERT_SUCCESS;
 		} catch(Exception e) {
 			return ResultMessages.LOADING_ERROR;
 		}

@@ -1,4 +1,4 @@
-package com.ccinfomDbApp.base;
+package armas.base;
 
 public class EquivRequest {
     private int requestId;

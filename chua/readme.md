@@ -2,10 +2,7 @@
 
 # Requirements
 - This project requires mysql-connector-j-9.1.0.jar
-- To run the project the user must include the environment variables:
-  DATABASE_URL,
-  DATABASE_PW,
-  DATABASE_USR
+
 
 # Core Data Sets
 - Students (Read Only)

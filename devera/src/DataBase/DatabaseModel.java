@@ -296,7 +296,6 @@ public class DatabaseModel {
 	        ResultSet gradeRecord = statement.executeQuery();
 	        	
 	        if(gradeRecord.next()) {
-	        	System.out.println("flag");
 	            grade.setStudentID(studentID);
 	            grade.setCourseCode(courseCode);
 	            grade.setSectionCode(gradeRecord.getString("sectionCode"));

@@ -1,4 +1,4 @@
-package com.ccinfomDbApp.base;
+package armas.base;
 
 import java.sql.*;
 import java.util.ArrayList;

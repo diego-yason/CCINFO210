@@ -1,4 +1,4 @@
-package com.ccinfomDbApp.base;
+package armas.base;
 
 import java.time.LocalDate;
 
