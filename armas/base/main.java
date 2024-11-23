@@ -302,10 +302,6 @@ public class main {
             }
         }
     }
+    
 }
-/*
-	String url = "jdbc:mysql://35.229.251.147:3306/CCINFO210DB"; 
-        	String username = "root"; 
-        	String password = "DLSU1234!"; 
 
-*/
