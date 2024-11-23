@@ -16,6 +16,7 @@ public class Driver {
 	public static void main(String[] args) {
 		int choice = 1;
 		while(choice != 0) {
+			try {
 			MainMenu.mainMenu();
 			choice = Integer.parseInt(scan.nextLine());
 			switch(choice) {
@@ -31,7 +32,11 @@ public class Driver {
 				rd.menu(scan);
 			}
 			}
+			} catch (Exception e) {
+				System.out.println("Please try again");
+			}
 		}
-	}
 
+}
+	
 }
