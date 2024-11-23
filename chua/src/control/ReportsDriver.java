@@ -116,7 +116,7 @@ public class ReportsDriver {
 			String outputPath = scan.nextLine();
 			FileWriter fw = new FileWriter(outputPath);
 			StringBuilder sb = new StringBuilder();
-			fw.write(String.format("%-10s | %-30s | %-30s | %-10.1f\n", "ID","Last Name","First Name","Grade"));
+			fw.write(String.format("%-10s | %-30s | %-30s | %-10s\n", "ID","Last Name","First Name","Grade"));
 			for(int i=0; i<reports.size(); i++) {
 				sb.append(String.format("%-10d | %-30s | %-30s | %-10.1f\n",
 						reports.get(i).getId(),
