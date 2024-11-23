@@ -15,6 +15,7 @@ public class ResultMessages {
 	public static String GRADE_INVALID = "Invalid grade, please try again";
 	public static String EMPTY_SET = "There are no records available";
 	public static String LOADING_ERROR = "An error occured in loading the data";
+	public static String LOADING_SUCCESS = "Successfully loaded the data";
 	public static String WRITE_ERROR = "An error occured in writing to the text file";
 	public static String WRITE_SUCCESS = "File writing success";
 	 

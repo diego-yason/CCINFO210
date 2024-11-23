@@ -9,9 +9,9 @@ public class Conn{
 
     //Wrapper function for connect
     public String connect() {
-        String url = System.getenv("DATABASE_URL");
-        String user = System.getenv("DATABASE_USR");
-        String pw = System.getenv("DATABASE_PW");
+        String url = "jdbc:mysql://35.229.251.147:3306/CCINFO210DB";
+        String user = "root";
+        String pw = "DLSU1234!";
         
         try {
         	Class.forName("com.mysql.cj.jdbc.Driver");
