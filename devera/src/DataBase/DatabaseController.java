@@ -199,6 +199,9 @@ public class DatabaseController {
 					System.out.println("Please enter a valid grade value");
 				}
 			}
+			else {
+				System.err.println("Student does not have a grade");
+			}
 		} catch(NumberFormatException e) {
 			System.err.println("Enter a valid student ID");
 		}
