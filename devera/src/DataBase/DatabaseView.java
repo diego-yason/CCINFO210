@@ -106,17 +106,11 @@ public class DatabaseView {
         return input;
     }
     
-    public void displayDegreeTypes(List<String> degreeTypes) {
-        System.out.println("Available Degree Types:");
-        for (String type : degreeTypes) {
+    public void displayList(List<String> list, String print) {
+        System.out.println("Available " + print + ": " );
+        for (String type : list) {
             System.out.println("- " + type);
         }
-    }
-    public void displayDegreeIDs(List<String> degreeIDs) {
-    	System.out.println("Available Degrees:");
-    	 for (String degreeID : degreeIDs) {
-    		 System.out.println("- " + degreeID);
-         }
     }
     
     public void displayDegree(Degree degree) {
