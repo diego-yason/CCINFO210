@@ -118,7 +118,7 @@ public class CoreData {
         System.out.println("Are you sure you want to remove this faculty?");
 
         if (App.getTextInput("Enter 'y' to confirm: ").equals("y")) {
-            query = App.readQuery("coreData/RemoveFaculty");
+            query = App.readQuery("coreData/DeleteFaculty");
             try (PreparedStatement pStatement = App.db.prepareStatement(query)) {
                 pStatement.setInt(1, profile.id);
                 pStatement.executeUpdate();
