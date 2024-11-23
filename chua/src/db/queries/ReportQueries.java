@@ -36,24 +36,23 @@ public class ReportQueries {
 			if(result != null)
 				throw new Exception(result);
 			
-			String query = "SELECT s.lastName, s.firstName, g.studentId, g.grade "
+			String query = "SELECT g.grade, COUNT(g.grade) as Count "
 					+ "FROM grades g "
 					+ "JOIN students s ON s.id = g.studentId "
 					+ "JOIN courses c ON c.code = g.courseCode "
 					+ "WHERE termId = ? "
 					+ "AND g.courseCode = ? "
-					+ "ORDER BY g.studentId ";
+					+ "GROUP BY g.grade ";
 			
 			PreparedStatement ps = this.connection.getConnection().prepareStatement(query);
 			ps.setString(1, termId);
 			ps.setString(2, courseCode);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				String lastName = rs.getString(1);
-				String firstName = rs.getString(2);
-				int id = rs.getInt(3);
-				float grade = rs.getFloat(4);
-				reportContent.add(new Report(lastName, firstName, grade, id));
+				float grade = rs.getFloat(1);
+				int count = rs.getInt(2);
+
+				reportContent.add(new Report(grade,count));
 			}
 			return reportContent;
 			
@@ -64,24 +63,17 @@ public class ReportQueries {
 		}
 	}
 	
-	public void sortByStudentName(ArrayList<Report> report) {
+	public void sortByCount(ArrayList<Report> report, boolean isAscending) {
 		Collections.sort(report, (rowFirst, rowSecond) -> {
-		
-			int lnCompare =  (int) ((Report) rowFirst).getLastName().compareTo(((Report) rowSecond).getLastName());
-			if(lnCompare != 0)
-				return lnCompare;
-			
-			int fnCompare = (int)(((Report) rowFirst).getFirstName().compareTo(((Report) rowSecond).getFirstName()));
-			return fnCompare;
+			if(isAscending)
+				return (int)(rowFirst.getCount() - rowSecond.getCount());
+			else
+				return (int)(rowSecond.getCount()-rowFirst.getCount());
 		});
 		
 	}
 	
-	public void sortByGrade(ArrayList<Report> report) {
-		Collections.sort(report, (rowFirst, rowSecond) -> {
-			return  Math.round(rowFirst.getGrade()-rowSecond.getGrade());
-		});
-	}
+
 	
 	
 	
