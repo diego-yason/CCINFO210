@@ -1,4 +1,4 @@
-package com.ccinfomDbApp.base;
+package armas.base;
 
 import java.time.LocalDate;
 import java.sql.Connection;
@@ -16,9 +16,9 @@ public class main {
 
         try {
            
-        	String url = "jdbc:mysql://localhost:3306/ccinfo210db"; 
+        	String url = "jdbc:mysql://35.229.251.147:3306/CCINFO210DB"; 
         	String username = "root"; 
-        	String password = "p@ssword!"; 
+        	String password = "DLSU1234!"; 
 
         	
             connection = DriverManager.getConnection(url, username, password);
@@ -304,17 +304,8 @@ public class main {
     }
 }
 /*
-String url = "jdbc:mysql://localhost:3306/ccinfo210db"; 
-String username = "root"; 
-String password = "p@ssword!"; 
-
- 	String url = "jdbc:mysql://100.103.244.13:3308/CCINFO210DB"; 
+	String url = "jdbc:mysql://35.229.251.147:3306/CCINFO210DB"; 
         	String username = "root"; 
         	String password = "DLSU1234!"; 
-        	
-        	nter student ID: 12312312
-Enter date (YYYY-MM-DD): 2024-11-21
-Enter approved by: 
-Enter request course code: CS101
-Enter equivalent course code: CS101
+
 */
