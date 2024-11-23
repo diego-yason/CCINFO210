@@ -5,9 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class App {
-    private static final String URL = "jdbc:mysql://localhost:3306/ccinfo210db";
-    // private static final String URL =
-    // "jdbc:mysql://100.103.244.13:3308/ccinfo210db";
+    // private static final String URL = "jdbc:mysql://localhost:3306/ccinfo210db";
+    private static final String URL = "jdbc:mysql://35.229.251.147:3306/CCINFO210DB";
     private static final String USER = "root";
     private static final String PASSWORD = "DLSU1234!";
 
@@ -15,6 +14,8 @@ public class App {
     public static Connection db;
 
     public static void main(String[] args) throws Exception {
+        System.err.println("Connecting to database...");
+
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         db = DriverManager.getConnection(URL, USER, PASSWORD);

@@ -27,9 +27,37 @@
       "port": 3308,
       "driver": "MySQL",
       "name": "renzo",
-      "database": "ccinfo210db",
+      "database": "CCINFO210DB",
       "username": "root",
       "password": "DLSU1234!"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "sql12.freesqldatabase.com",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "cloud",
+      "database": "sql12746893",
+      "username": "sql12746893",
+      "password": "XLpLI4bXAW"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "35.229.251.147",
+      "port": 3306,
+      "driver": "MySQL",
+      "username": "root",
+      "password": "DLSU1234!",
+      "database": "CCINFO210DB",
+      "name": "google cloud"
     }
   ]
 }
