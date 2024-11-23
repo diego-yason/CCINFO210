@@ -57,23 +57,22 @@ public class ReportsDriver {
 				int indexTwo = -1;
 				while(!(indexTwo >= 0 && indexTwo <= 2)) {
 					System.out.println("Would you like sort the records?");
-					System.out.println("1 - By Complete Name");
-					System.out.println("2 - By Grades");
-					System.out.println("0 - By Student ID (Default)");
+					System.out.println("1 - By Grade Count Descending");
+					System.out.println("2 - By Grade Count Ascending");
+					System.out.println("0 - By Grade Value");
 					indexTwo = Integer.parseInt(scan.nextLine());
 					if(!(indexTwo >= 0 && indexTwo <= 2)) {
 						System.out.println("Please try again");
 					}
-					
 				}
 				
 				switch(indexTwo) {
 					case 1: {
-						rq.sortByStudentName(reports);
+						rq.sortByCount(reports, true);
 						break;
 					}
 					case 2: {
-						rq.sortByGrade(reports);
+						rq.sortByCount(reports, false);
 						break;
 					}
 					case 0: {
@@ -116,14 +115,9 @@ public class ReportsDriver {
 			String outputPath = scan.nextLine();
 			FileWriter fw = new FileWriter(outputPath);
 			StringBuilder sb = new StringBuilder();
-			fw.write(String.format("%-10s | %-30s | %-30s | %-10s\n", "ID","Last Name","First Name","Grade"));
+			fw.write(String.format("%-10s | %-10s\n","Grade","Count"));
 			for(int i=0; i<reports.size(); i++) {
-				sb.append(String.format("%-10d | %-30s | %-30s | %-10.1f\n",
-						reports.get(i).getId(),
-						reports.get(i).getLastName(),
-						reports.get(i).getFirstName(),
-						reports.get(i).getGrade()));
-				
+				sb.append(String.format("%-10.1f | %-10d\n", reports.get(i).getGrade(), reports.get(i).getCount()));
 				fw.write(sb.toString());
 				sb.setLength(0);
 			}
