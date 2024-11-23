@@ -63,10 +63,11 @@ public class DatabaseController {
 		String degreeID = DBView.getInput("Enter a unique 10-character DegreeID: ");
         String name = DBView.getInput("Enter the Degree Name: ");
         List<String> degreeTypes = DBModel.getDegreeTypes(connection);
-        DBView.displayDegreeTypes(degreeTypes);
+        List<String> colleges = DBModel.getColleges(connection);
+        DBView.displayList(degreeTypes, "degree types");
         String typeId = DBView.getInput("Enter the Degree Type: ");
+        DBView.displayList(colleges, "colleges");
         String college = DBView.getInput("Enter the College Name: ");
-        
         Degree degree = new Degree(degreeID, name, typeId, college);
         DBModel.insertDegree(degree, connection);
 	}
@@ -98,7 +99,7 @@ public class DatabaseController {
 	
 	public void singleDegreeView() {
 		List<String> degreeIDs = DBModel.getDegreeID(connection);
-		DBView.displayDegreeIDs(degreeIDs);
+		DBView.displayList(degreeIDs, "degree IDs");
 		String degreeID = DBView.getInput("Enter the ID of the degree you want to view: ");
 		DBView.displayDegree(DBModel.viewDegree(degreeID, connection));
 		scanner.nextLine();
@@ -145,7 +146,7 @@ public class DatabaseController {
 	public void relatedDegreeView() {
 		List<String> degreeIDs = DBModel.getDegreeID(connection);
 		List<Student> students = new ArrayList<>();
-		DBView.displayDegreeIDs(degreeIDs);
+		DBView.displayList(degreeIDs, "degree IDs");
 		String degreeID = DBView.getInput("Enter the ID of the degree you want to view: ");
 		DBView.displayDegree(DBModel.viewDegree(degreeID, connection));
 		students = DBModel.getStudents(degreeID, connection);
@@ -169,11 +170,10 @@ public class DatabaseController {
 	public void deleteDegree() {
 		String degreeID = DBView.getInput("Enter the ID of the degree you would like to delete: ");
 		DBModel.deleteDegree(degreeID, connection);
-		scanner.next();
+		scanner.nextLine();
 	}
 	
 	public void transaction() {
-		Grade previousGrade = new Grade();
 		Grade newGrade = new Grade();
 		float inputtedGrade;
 		
@@ -181,13 +181,26 @@ public class DatabaseController {
 		String course = DBView.getInput("Enter the ID of the course you would like to change the grade of: ");
 		String termId = DBView.getInput("Enter the ID of the term: ");
 		
-		previousGrade = DBModel.getGrade(Integer.parseInt(studentId), course, termId, connection);
-		
-		if (previousGrade != null) {
-	 	    inputtedGrade = Float.parseFloat(DBView.getInput("Enter the new grade: "));
-	 	    newGrade.setGrade(inputtedGrade);
-	 	    DBModel.updateGrade(newGrade, connection);
-	 	    DBModel.insertGradeHistory(previousGrade, connection);
+		try {
+			Grade previousGrade = new Grade();
+			previousGrade = DBModel.getGrade(Integer.parseInt(studentId), course, termId, connection);
+			if (previousGrade != null) {
+				try {
+			 	    inputtedGrade = Float.parseFloat(DBView.getInput("Enter the new grade: "));
+			 	    newGrade.setGrade(inputtedGrade);
+			 	    newGrade.setStudentID(Integer.parseInt(studentId));
+			 	    newGrade.setCourseCode(course);
+			 	    newGrade.setTermId(termId);
+			 	    newGrade.setSectionCode(previousGrade.getSectionCode());
+			 	    
+			 	    DBModel.updateGrade(newGrade, connection);
+			 	    DBModel.insertGradeHistory(previousGrade, connection);
+				} catch(NumberFormatException e) {
+					System.out.println("Please enter a valid grade value");
+				}
+			}
+		} catch(NumberFormatException e) {
+			System.err.println("Enter a valid student ID");
 		}
 	}
 	
@@ -197,11 +210,15 @@ public class DatabaseController {
 		Degree degree = new Degree();
 		float CGPA;
 		
+		try {
 		String studentID = DBView.getInput("Enter ID of the student you want to generate TOR for: ");
 		records = DBModel.getTranscriptRecords(Integer.parseInt(studentID), connection);
 		student = DBModel.getStudent(Integer.parseInt(studentID), connection);
 		degree = DBModel.viewDegree(student.getDegreeProgram(), connection);
 		CGPA = DBModel.getCGPA(records);
 		DBView.displayTranscriptRecord(records, student, degree, CGPA);
+		} catch (NumberFormatException e) {
+			System.err.println("Enter a valid student ID");
+		}
 	}
 }

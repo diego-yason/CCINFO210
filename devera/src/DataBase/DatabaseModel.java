@@ -1,11 +1,14 @@
 package DataBase;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class DatabaseModel {
 	
@@ -47,7 +50,6 @@ public class DatabaseModel {
             }
         } catch (SQLException e) {
             System.err.println("SQL exception occurred while inserting degree.");
-            e.printStackTrace();
         }
     }
 	
@@ -67,7 +69,7 @@ public class DatabaseModel {
                 System.out.println("A new degree was inserted successfully!");
             }
 		} catch (SQLException e) {
-            System.err.println("SQL exception occurred while inserting degree.");
+            System.err.println("SQL exception occurred while updating degree.");
             e.printStackTrace();
         }
 	}
@@ -90,7 +92,7 @@ public class DatabaseModel {
 	            viewedDegree.setCollege(degree.getString("college"));
 	        }	
 		}	catch (SQLException e) {
-            System.err.println("SQL exception occurred while inserting degree.");
+            System.err.println("SQL exception occurred while viewing degree.");
             e.printStackTrace();
         }
 		return viewedDegree;
@@ -105,7 +107,7 @@ public class DatabaseModel {
                 System.out.println("The degree has been deleted successfully!");
             }
 		} catch (SQLException e) {
-            System.err.println("SQL exception occurred while inserting degree.");
+            System.err.println("SQL exception occurred while deleting degree.");
             e.printStackTrace();
         }
 	}
@@ -147,9 +149,24 @@ public class DatabaseModel {
 			}
 		} catch (SQLException e) {
 			System.err.println("SQL exception occurred while retrieving degree types.");
-            e.printStackTrace();
 		}
 		return degreeTypes;
+	}
+	
+	public List<String> getColleges(Connection connection) {
+		List<String> colleges = new ArrayList<>();
+		
+		String query = "SELECT * FROM ref_colleges";
+		
+		try(PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet collegeList = statement.executeQuery();) {
+			while (collegeList.next()) {
+			    colleges.add(collegeList.getString("name"));
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL exception occurred while retrieving colleges.");
+		}
+		return colleges;
 	}
 	
 	public List<String> getDegreeID(Connection connection) {
@@ -163,8 +180,7 @@ public class DatabaseModel {
 				degree.add(degrees.getString("id"));
 			}
 		} catch (SQLException e) {
-			System.err.println("SQL exception occurred while retrieving degree types.");
-            e.printStackTrace();
+			System.err.println("SQL exception occurred while retrieving degree IDs.");
 		}
 		return degree;
 	}
@@ -192,7 +208,6 @@ public class DatabaseModel {
 	        }
 	    } catch (SQLException e) {
 	        System.err.println("SQL exception occurred while retrieving students.");
-	        e.printStackTrace();
 	    }
 	    return students;
 	} 
@@ -215,8 +230,7 @@ public class DatabaseModel {
 	            student.setDegreeProgram(studentRecord.getString("degreeProgram"));
 	        }
 		} catch (SQLException e) {
-	        System.err.println("SQL exception occurred while retrieving students.");
-	        e.printStackTrace();
+	        System.err.println("SQL exception occurred while retrieving student.");
 	    }
 		return student;
 	}
@@ -247,8 +261,7 @@ public class DatabaseModel {
 				records.add(record);
 			}
 		} catch (SQLException e) {
-	        System.err.println("SQL exception occurred while retrieving students.");
-	        e.printStackTrace();
+	        System.err.println("SQL exception occurred while retrieving transcript records.");
 		}
 		
 		return records;
@@ -283,20 +296,20 @@ public class DatabaseModel {
 	        ResultSet gradeRecord = statement.executeQuery();
 	        	
 	        if(gradeRecord.next()) {
+	        	System.out.println("flag");
 	            grade.setStudentID(studentID);
 	            grade.setCourseCode(courseCode);
 	            grade.setSectionCode(gradeRecord.getString("sectionCode"));
 	            grade.setTermId(termID);
 	            grade.setGrade(gradeRecord.getFloat("grade"));
+	            return grade;
 	            
 	       	}
-	        return grade;
 	    } catch (SQLException e) {
 	        System.err.println("SQL exception occurred while retrieving grades.");
 	        e.printStackTrace();
-	        
-	        return null;
 	    }
+		return null;
 	}	
 	
 	public void updateGrade(Grade grade, Connection connection) {
@@ -318,12 +331,11 @@ public class DatabaseModel {
             }
 		} catch (SQLException e) {
             System.err.println("SQL exception occurred while updating grade.");
-            e.printStackTrace();
         }
 	}
 	
 	public void insertGradeHistory(Grade grade, Connection connection) {
-		String query = "INSERT INTO grade_history (grade, studentId, sectionCode, courseCode, termId) VALUES (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO grade_history (previousGrade, studentId, sectionCode, courseCode, termId, timeStamp) VALUES (?, ?, ?, ?, ?, now())";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -338,7 +350,7 @@ public class DatabaseModel {
                 System.out.println("A new grade was inserted successfully!");
             }
         } catch (SQLException e) {
-            System.err.println("SQL exception occurred while inserting a grade.");
+            System.err.println("SQL exception occurred while inserting in grade history.");
             e.printStackTrace();
         }
 	}
