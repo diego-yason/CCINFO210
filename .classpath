@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="yason/lib/mysql-connector-j-9.0.0/src/legacy/java/|yason/lib/mysql-connector-j-9.0.0/src/main/user-api/java/|devera/src/|yason/lib/mysql-connector-j-9.0.0/src/build/java/|yason/lib/mysql-connector-j-9.0.0/src/main/protocol-impl/java/|yason/lib/mysql-connector-j-9.0.0/src/generated/java/|chua/src/|yason/lib/mysql-connector-j-9.0.0/src/main/user-impl/java/|yason/lib/mysql-connector-j-9.0.0/src/main/core-impl/java/|yason/lib/mysql-connector-j-9.0.0/src/main/core-api/java/|yason/src/|yason/lib/mysql-connector-j-9.0.0/src/test/java/|yason/lib/mysql-connector-j-9.0.0/src/demo/java/" kind="src" path=""/>
+	<classpathentry kind="src" path="chua/src"/>
+	<classpathentry kind="src" path="devera/src"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/build/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/demo/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/generated/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/legacy/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/main/core-api/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/main/core-impl/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/main/protocol-impl/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/main/user-api/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/main/user-impl/java"/>
+	<classpathentry kind="src" path="yason/lib/mysql-connector-j-9.0.0/src/test/java"/>
+	<classpathentry kind="src" path="yason/src"/>
+	<classpathentry kind="output" path="chua/bin"/>
+</classpath>
